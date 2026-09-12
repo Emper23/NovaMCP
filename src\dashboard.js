@@ -6,6 +6,7 @@ import { loadConfig, updateConfig, getRootDir, getUserConfigPath, relayMcpUrl, r
 import { loadRuntimeState, updateRuntimeState } from "./runtime-state.js";
 import { audit, recentAudit } from "./audit-log.js";
 import { getUpdateState, checkForUpdates, downloadUpdate, installUpdate } from "./update-manager.js";
+import { getAboutInfo } from "./about.js";
 
 const root = getRootDir();
 const plugin = JSON.parse(readFileSync(resolve(root, "plugin.json"), "utf8"));
@@ -178,6 +179,7 @@ const server = http.createServer(async (req, res) => {
     if (req.method === "GET" && url.pathname === "/api/audit") return json(res, { events: recentAudit(60) });
     if (req.method === "GET" && url.pathname === "/api/diagnostics") return json(res, { local: (await status()).diagnostics, cloud: await cloudDiagnostics(), audit: recentAudit(20) });
     if (req.method === "GET" && url.pathname === "/api/update") return json(res, getUpdateState());
+    if (req.method === "GET" && url.pathname === "/api/about") return json(res, getAboutInfo(plugin.version, getUpdateState()));
     if (req.method === "POST" && url.pathname === "/api/update/check") return json(res, await checkForUpdates());
     if (req.method === "POST" && url.pathname === "/api/update/download") return json(res, await downloadUpdate(), 202);
     if (req.method === "POST" && url.pathname === "/api/update/install") return json(res, installUpdate(), 202);
