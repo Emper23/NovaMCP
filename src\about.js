@@ -7,6 +7,17 @@ export const NOVAMCP_ABOUT = {
   licenseLabel: "Partial source available · production backend remains private",
   changelog: [
     {
+      version: "7.1.0",
+      title: "Control Center & onboarding",
+      changes: [
+        "Rebuilt the Dashboard with a sidebar and dedicated Overview, Setup, Connections, Roblox, Security, Diagnostics, Updates and About pages.",
+        "Added a first-run Setup Wizard with Roblox integration, ChatGPT pairing, connection tests and security defaults.",
+        "Added Roblox Studio MCP detection, Studio version status, launcher synchronization, Repair MCP Integration and Open Studio actions.",
+        "Added Diagnostics ZIP export with automatic token, pairing-code, credential and common user-path redaction.",
+        "Added Code Signing status plus a guarded build:signed release workflow that refuses to pretend an unsigned build is signed."
+      ]
+    },
+    {
       version: "7.0.4",
       title: "Silent in-app updates",
       changes: [
