@@ -1,12 +1,13 @@
-# NovaMCP 7.0.4
+# NovaMCP 7.1.0
 
-## What changed
+## Control Center & onboarding
 
-- In-app updates now install silently without showing the NSIS installer progress window.
-- NovaMCP closes, applies the downloaded update in the background, and starts again automatically.
-- Manual Setup installers keep the normal UI for first-time installation.
-- About & Changelog now includes the 7.0.4 release.
+- Rebuilt the Dashboard with a sidebar and dedicated pages for Overview, Setup, Connections, Roblox, Security, Diagnostics, Updates and About.
+- Added a first-run Setup Wizard for Roblox MCP, ChatGPT pairing, connection tests and security defaults.
+- Added Roblox Studio / StudioMCP detection, version status, launcher synchronization, Repair MCP Integration and Open Studio actions.
+- Added shareable Diagnostics ZIP export with automatic token, pairing-code, credential and common user-path redaction.
+- Added Code Signing status and a guarded `npm run build:signed` workflow.
+- Fixed MCP server/client version reporting so it follows the actual NovaMCP package version instead of the old hard-coded 7.0.0.
 
-## Upgrade note
-
-The upgrade from 7.0.3 to 7.0.4 may still show the installer once because 7.0.3 contains the older non-silent updater call. Updates started from 7.0.4 and newer use silent installation.
+### Code signing note
+Public builds remain unsigned until a trusted Windows code-signing certificate is provisioned. The signed-build workflow now refuses to continue without signing credentials instead of silently producing an unsigned artifact.
