@@ -1,0 +1,17 @@
+1. ใช้ GitHub repository: Emper23/NovaMCP
+2. อัปโหลดไฟล์ทั้งหมดจากโฟลเดอร์ github-public เข้า repository
+3. อย่าอัปโหลดไฟล์จากโปรเจกต์หลัก, node_modules, config.json หรือ cloudflare production source
+4. ไปที่ Releases > Draft a new release
+5. Tag: v7.0.2
+6. Release title: NovaMCP 7.0.2
+7. ใช้ข้อความจาก RELEASE_NOTES.md เป็น release description
+8. แนบไฟล์จาก github-release-assets:
+   - NovaMCP-Setup-7.0.2-x64.exe
+   - NovaMCP-Setup-7.0.2-x64.exe.blockmap
+   - NovaMCP-Portable-7.0.2-x64.exe
+   - latest.yml
+   - NovaMCP-Partial-Source-7.0.2.zip
+   - SHA256SUMS.txt
+9. Publish release
+
+สำคัญ: latest.yml + blockmap ต้องอยู่ใน Release เดียวกับ Setup เพื่อให้ระบบอัปเดตในแอปทำงาน
