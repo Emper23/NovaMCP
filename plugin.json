@@ -1,0 +1,8 @@
+{
+  "id": "novamcp",
+  "name": "NovaMCP",
+  "version": "7.0.1",
+  "type": "mcp-connector",
+  "entry": "src/bridge-server.js",
+  "transport": "streamable-http"
+}
