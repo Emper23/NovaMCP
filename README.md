@@ -4,9 +4,15 @@ NovaMCP เป็นตัวเชื่อม ChatGPT กับ Roblox Studio 
 
 ## ดาวน์โหลด
 
-ดาวน์โหลดเวอร์ชันล่าสุดจาก GitHub Releases แล้วใช้ไฟล์:
+ดาวน์โหลดเวอร์ชันล่าสุดจาก GitHub Releases
 
-`NovaMCP-Setup-7.0.1-x64.exe`
+ไฟล์แนะนำสำหรับผู้ใช้ทั่วไป:
+
+`NovaMCP-Setup-7.0.2-x64.exe`
+
+ถ้าต้องการแบบไม่ติดตั้ง:
+
+`NovaMCP-Portable-7.0.2-x64.exe`
 
 รองรับ Windows 64-bit
 
@@ -20,6 +26,9 @@ NovaMCP เป็นตัวเชื่อม ChatGPT กับ Roblox Studio 
 - Desktop Control ที่เปิด/ปิดได้จาก Dashboard
 - Audit log และ diagnostics
 - Config แยกต่อผู้ใช้ใน `%APPDATA%\NovaMCP`
+- ระบบอัปเดตจาก GitHub Releases
+  - รุ่น Setup เช็ก ดาวน์โหลด และกด `Restart & Install` ได้จาก Dashboard
+  - รุ่น Portable แจ้งเมื่อมีเวอร์ชันใหม่และเปิดลิงก์ดาวน์โหลดให้
 
 ## Source ที่เปิดใน repository นี้
 
@@ -28,6 +37,7 @@ repository นี้เป็น **partial source / source-available** ไม่
 ส่วนที่เปิดให้ดู:
 - Dashboard UI และ local control plane
 - Electron desktop shell
+- Update manager
 - Config/runtime state
 - Audit log
 - Desktop Control module
@@ -39,10 +49,10 @@ repository นี้เป็น **partial source / source-available** ไม่
 
 ## Verify download
 
-ไฟล์ `SHA256SUMS.txt` ใน Release ใช้ตรวจ SHA-256 ของตัวติดตั้งได้
+ไฟล์ `SHA256SUMS.txt` ใน Release ใช้ตรวจ SHA-256 ของไฟล์ดาวน์โหลดได้
 
 ## Version
 
-Current release: `7.0.1`
+Current release: `7.0.2`
 
 ดูรายละเอียดใน `RELEASE_NOTES.md`
