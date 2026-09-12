@@ -1,27 +1,27 @@
-# NovaMCP 7.0.2
+# NovaMCP 7.0.3
 
 ## Release
 
 ไฟล์แนะนำสำหรับผู้ใช้ทั่วไป:
 
-`NovaMCP-Setup-7.0.2-x64.exe`
+`NovaMCP-Setup-7.0.3-x64.exe`
 
-ไฟล์แบบ Portable:
+## มีอะไรใหม่ในเวอร์ชันนี้
 
-`NovaMCP-Portable-7.0.2-x64.exe`
+- เพิ่มหน้า `About & Changelog` ใน Dashboard
+- แสดง Current version และ Latest version ในจุดเดียว
+- เพิ่ม `What's New` สำหรับเวอร์ชันปัจจุบัน
+- เพิ่มประวัติการเปลี่ยนแปลงของ 7.0.3, 7.0.2 และ 7.0.1
+- เพิ่มปุ่ม GitHub, Latest Release, Source Policy และ Check Update
+- เชื่อมข้อมูล About เข้ากับระบบ updater เดิม
 
-## มีอะไรใหม่
+## ระบบอัปเดต
 
-- เพิ่มระบบอัปเดตผ่าน GitHub Releases
-- รุ่น Setup เช็กเวอร์ชันใหม่จาก Dashboard ได้
-- รุ่น Setup ดาวน์โหลดอัปเดตพร้อมแสดงเปอร์เซ็นต์
-- โหลดเสร็จสามารถกด `Restart & Install` เพื่อติดตั้งเวอร์ชันใหม่
-- รุ่น Portable แจ้งเมื่อมีเวอร์ชันใหม่และเปิดไฟล์ดาวน์โหลดล่าสุดให้
-- เพิ่มสถานะ Current version, Latest version และ Edition ใน Dashboard
-- ยังคงฟีเจอร์ ChatGPT ↔ Roblox Studio, Desktop Control, Audit Log และ Diagnostics เดิม
+ผู้ใช้ NovaMCP 7.0.2 แบบ Setup สามารถกด `Check for Updates` แล้วดาวน์โหลด 7.0.3 จาก Dashboard ได้โดยตรง จากนั้นใช้ `Restart & Install` เพื่อติดตั้ง
+
+Portable จะตรวจพบเวอร์ชันใหม่และเปิดหน้า Release ล่าสุดให้ดาวน์โหลดตัวใหม่
 
 ## หมายเหตุ
 
-- Windows 64-bit เท่านั้น
-- ไฟล์ยังไม่ได้เซ็น Authenticode จึงอาจมี Windows SmartScreen เตือน
+- Windows 64-bit
 - Source ใน repository เป็น partial source ไม่ใช่ production backend ทั้งหมด
