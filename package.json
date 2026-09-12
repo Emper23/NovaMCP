@@ -1,6 +1,6 @@
 {
   "name": "novamcp-partial-source",
-  "version": "7.0.2",
+  "version": "7.0.3",
   "private": false,
   "description": "Partial source for the NovaMCP desktop application.",
   "license": "UNLICENSED"
