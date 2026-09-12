@@ -51,6 +51,8 @@ export function defaultConfig() {
   config.security.desktopControlEnabled ??= false;
   config.security.auditLogEnabled ??= true;
   config.security.requireLocalDashboard ??= true;
+  config.onboarding ??= {};
+  config.onboarding.completed ??= null;
   return config;
 }
 
@@ -69,6 +71,8 @@ export function loadConfig() {
   config.security.desktopControlEnabled ??= false;
   config.security.auditLogEnabled ??= true;
   config.security.requireLocalDashboard ??= true;
+  config.onboarding ??= {};
+  config.onboarding.completed ??= null;
   return config;
 }
 
