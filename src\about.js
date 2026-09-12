@@ -7,6 +7,15 @@ export const NOVAMCP_ABOUT = {
   licenseLabel: "Partial source available · production backend remains private",
   changelog: [
     {
+      version: "7.1.1",
+      title: "Support page",
+      changes: [
+        "Added a dedicated สนับสนุนค่ากาแฟ page to the Control Center sidebar.",
+        "Added a PromptPay support card using the original payment QR payload.",
+        "Added server, Cloud Relay and development support information with voluntary-support wording."
+      ]
+    },
+    {
       version: "7.1.0",
       title: "Control Center & onboarding",
       changes: [
