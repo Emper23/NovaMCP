@@ -7,6 +7,15 @@ export const NOVAMCP_ABOUT = {
   licenseLabel: "Partial source available · production backend remains private",
   changelog: [
     {
+      version: "7.0.4",
+      title: "Silent in-app updates",
+      changes: [
+        "In-app updates now install silently without showing the NSIS installer window.",
+        "NovaMCP closes, installs the downloaded update in the background and launches again automatically.",
+        "Manual Setup installers still keep the normal installation UI for first-time installs."
+      ]
+    },
+    {
       version: "7.0.3",
       title: "About & Changelog",
       changes: [
