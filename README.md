@@ -8,11 +8,11 @@ NovaMCP เป็นตัวเชื่อม ChatGPT กับ Roblox Studio 
 
 ไฟล์แนะนำสำหรับผู้ใช้ทั่วไป:
 
-`NovaMCP-Setup-7.0.3-x64.exe`
+`NovaMCP-Setup-7.0.4-x64.exe`
 
 ถ้าต้องการแบบไม่ติดตั้ง:
 
-`NovaMCP-Portable-7.0.3-x64.exe`
+`NovaMCP-Portable-7.0.4-x64.exe`
 
 รองรับ Windows 64-bit
 
@@ -53,6 +53,6 @@ repository นี้เป็น **partial source / source-available** ไม่
 
 ## Version
 
-Current release: `7.0.3`
+Current release: `7.0.4`
 
 ดูรายละเอียดใน `RELEASE_NOTES.md`
