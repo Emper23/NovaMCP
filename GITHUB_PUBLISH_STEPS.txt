@@ -1,20 +1,20 @@
-NovaMCP 7.0.3 publish checklist
+NovaMCP 7.1.0 publish checklist
 
-1. Update version in package.json and plugin.json to 7.0.3
+1. Update version in package.json and plugin.json to 7.1.0
 2. Run npm run check
 3. Build:
    - npm run build:installer
    - npm run build:portable
 4. Upload partial source from github-public to Emper23/NovaMCP
-5. Create GitHub Release tag v7.0.3
+5. Create GitHub Release tag v7.1.0
 6. Attach:
-   - NovaMCP-Setup-7.0.3-x64.exe
-   - NovaMCP-Setup-7.0.3-x64.exe.blockmap
-   - NovaMCP-Portable-7.0.3-x64.exe
+   - NovaMCP-Setup-7.1.0-x64.exe
+   - NovaMCP-Setup-7.1.0-x64.exe.blockmap
+   - NovaMCP-Portable-7.1.0-x64.exe
    - latest.yml
-   - NovaMCP-Partial-Source-7.0.3.zip
+   - NovaMCP-Partial-Source-7.1.0.zip
    - SHA256SUMS.txt
-7. Verify /releases/latest returns v7.0.3
+7. Verify /releases/latest returns v7.1.0
 8. Test NovaMCP 7.0.2 Setup -> Check for Updates -> Download Update -> Restart & Install
 
 Repository: https://github.com/Emper23/NovaMCP
