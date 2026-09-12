@@ -1,7 +1,94 @@
 {
-  "name": "novamcp-partial-source",
-  "version": "7.1.0",
-  "private": false,
-  "description": "Partial source for the NovaMCP desktop application.",
-  "license": "UNLICENSED"
+  "name": "novamcp",
+  "version": "7.1.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "electron .",
+    "app": "node src/app.js",
+    "host": "node src/host.js",
+    "dashboard": "node src/dashboard.js",
+    "bridge": "node src/bridge-server.js",
+    "relay": "node src/cloud-relay-agent.js",
+    "discover": "node src/tool-discovery.js",
+    "package": "node src/installer.js",
+    "check": "node --check src/config-store.js && node --check src/runtime-state.js && node --check src/audit-log.js && node --check src/desktop-control.js && node --check src/cloud-relay-agent.js && node --check src/bridge-server.js && node --check src/roblox-integration.js && node --check src/diagnostics-export.js && node --check src/signing-status.js && node --check src/about.js && node --check src/dashboard.js && node --check src/update-manager.js && node --check src/electron-main.js && node --check cloudflare/chatgpt-worker.js",
+    "deploy": "wrangler deploy",
+    "dev": "electron .",
+    "build:dir": "node scripts/build.cjs dir",
+    "build:installer": "node scripts/build.cjs installer",
+    "build:portable": "node scripts/build.cjs portable",
+    "build:all": "node scripts/build.cjs all",
+    "build:signed": "node scripts/require-signing.cjs && node scripts/build.cjs all"
+  },
+  "dependencies": {
+    "electron-updater": "^6.8.9",
+    "ws": "^8.20.0"
+  },
+  "devDependencies": {
+    "electron": "^44.3.0",
+    "electron-builder": "^26.15.3",
+    "wrangler": "^4.130.0"
+  },
+  "productName": "NovaMCP",
+  "description": "NovaMCP desktop connector for ChatGPT and Roblox Studio",
+  "main": "src/electron-main.js",
+  "build": {
+    "appId": "com.emperhub.novamcp",
+    "productName": "NovaMCP",
+    "asar": true,
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "src/**/*",
+      "public/**/*",
+      "config.json",
+      "plugin.json",
+      "package.json",
+      "node_modules/ws/**/*",
+      "build/icon.svg",
+      "scripts/build.cjs"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.svg"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "NovaMCP"
+    },
+    "asarUnpack": [
+      "src/**/*",
+      "public/**/*",
+      "config.json",
+      "plugin.json",
+      "node_modules/ws/**/*"
+    ],
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "Emper23",
+        "repo": "NovaMCP",
+        "releaseType": "release"
+      }
+    ]
+  },
+  "author": "EmperHub"
 }
