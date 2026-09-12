@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NovaMCP Control Center</title>
+<style>
+:root{color-scheme:dark;--bg:#070913;--panel:rgba(15,19,36,.78);--panel2:rgba(19,25,48,.72);--border:rgba(128,146,255,.16);--text:#eef2ff;--muted:#8f9bb8;--blue:#5b8cff;--cyan:#5ce1e6;--purple:#9d74ff;--green:#45df99;--red:#ff647c;--amber:#f7c66b;--shadow:0 18px 50px rgba(0,0,0,.3)}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 12% 12%,rgba(78,98,255,.17),transparent 28%),radial-gradient(circle at 88% 15%,rgba(143,82,255,.15),transparent 25%),linear-gradient(150deg,#070913 0%,#090c18 48%,#060812 100%);color:var(--text);font-family:Inter,Segoe UI,Tahoma,sans-serif}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:28px 28px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.7),transparent 82%)}
+.app{width:min(1220px,calc(100% - 32px));margin:0 auto;padding:28px 0 54px}.top{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:22px}.brand{display:flex;align-items:center;gap:14px}.logo{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;font-weight:900;font-size:20px;background:linear-gradient(145deg,var(--blue),var(--purple));box-shadow:0 0 35px rgba(91,140,255,.32)}.brand h1{font-size:24px;line-height:1.1;margin:0}.brand p{margin:6px 0 0;color:var(--muted);font-size:13px}.pill{display:inline-flex;align-items:center;gap:8px;padding:9px 13px;border:1px solid var(--border);background:rgba(14,18,34,.8);border-radius:999px;font-size:13px}.dot{width:8px;height:8px;border-radius:50%;background:#59627b}.dot.on{background:var(--green);box-shadow:0 0 14px rgba(69,223,153,.7)}.dot.warn{background:var(--amber)}.dot.off{background:var(--red)}
+.status-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.status-card,.card{border:1px solid var(--border);background:linear-gradient(145deg,var(--panel),rgba(9,12,25,.82));backdrop-filter:blur(14px);box-shadow:var(--shadow)}.status-card{border-radius:17px;padding:16px 17px}.label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#7885a8}.value{margin-top:9px;font-size:16px;font-weight:750;display:flex;align-items:center;gap:9px}.sub{margin-top:6px;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;margin-top:14px}.card{border-radius:20px;padding:20px}.card h2{font-size:15px;margin:0}.head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:17px}.muted{color:var(--muted)}.pair-card{position:relative;overflow:hidden}.pair-card:after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:rgba(91,140,255,.12);filter:blur(12px);right:-130px;top:-150px}.pair-code{position:relative;z-index:1;font:800 31px/1.2 Consolas,monospace;letter-spacing:.12em;margin:7px 0 12px}.url{position:relative;z-index:1;padding:12px 13px;border-radius:12px;background:rgba(5,8,18,.7);border:1px solid rgba(120,141,255,.14);font:12px Consolas,monospace;color:#b8c5e7;word-break:break-all}.buttons{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px;position:relative;z-index:1}button{appearance:none;border:1px solid rgba(123,142,255,.22);background:#151c35;color:#edf2ff;border-radius:11px;padding:9px 13px;font-weight:700;font-size:12px;cursor:pointer;transition:.18s transform,.18s border-color,.18s background}button:hover{transform:translateY(-1px);border-color:rgba(129,149,255,.48);background:#1a2444}button.primary{background:linear-gradient(135deg,#477df2,#7757ea);border:0;padding:10px 15px}button.danger{background:rgba(104,30,48,.45);border-color:rgba(255,100,124,.25);color:#ffc2cc}button.ghost{background:rgba(11,15,29,.54)}button:disabled{opacity:.45;cursor:not-allowed;transform:none}.switch{width:48px;height:27px;border-radius:999px;background:#20283e;padding:3px;cursor:pointer;border:1px solid var(--border);transition:.2s}.switch span{display:block;width:19px;height:19px;background:#78839d;border-radius:50%;transition:.2s}.switch.on{background:rgba(69,223,153,.2);border-color:rgba(69,223,153,.35)}.switch.on span{transform:translateX(20px);background:var(--green);box-shadow:0 0 13px rgba(69,223,153,.45)}
+.rows{display:grid}.row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(131,146,205,.09)}.row:last-child{border-bottom:0}.row span{font-size:13px;color:var(--muted)}.row b{font-size:13px;text-align:right}.security-note{font-size:12px;line-height:1.55;color:var(--muted);padding:12px;border-radius:12px;background:rgba(7,10,21,.58);border:1px solid rgba(131,146,205,.1);margin-top:13px}.diag-list,.audit-list{display:grid;gap:8px;max-height:300px;overflow:auto}.diag{padding:10px 11px;border-radius:11px;background:rgba(7,10,22,.58);border:1px solid rgba(128,146,255,.09)}.diag-top{display:flex;justify-content:space-between;gap:10px;font-size:12px}.diag-name{color:#d9e1ff;font-weight:700}.diag-time{color:#697696}.diag-detail{color:#8996b5;font:11px Consolas,monospace;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.update-progress{height:8px;border-radius:999px;background:rgba(7,10,22,.85);border:1px solid rgba(128,146,255,.12);overflow:hidden;margin-top:13px}.update-progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--purple));transition:width .25s ease}.update-message{margin-top:10px;font-size:12px;line-height:1.55;color:var(--muted)}.footer{margin-top:18px;color:#64708d;font-size:11px;text-align:center}.toast{position:fixed;right:20px;bottom:20px;background:#171e34;border:1px solid var(--border);padding:11px 14px;border-radius:12px;box-shadow:var(--shadow);opacity:0;transform:translateY(10px);pointer-events:none;transition:.2s}.toast.show{opacity:1;transform:none}
+@media(max-width:900px){.status-grid{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}}@media(max-width:560px){.app{width:min(100% - 20px,1220px);padding-top:18px}.top{align-items:flex-start;flex-direction:column}.status-grid{grid-template-columns:1fr}.pair-code{font-size:25px}.card{padding:16px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="brand"><div class="logo">N</div><div><h1>NovaMCP Control Center</h1><p id="version">Roblox Studio + Desktop bridge</p></div></div>
+    <div class="pill"><i class="dot" id="overallDot"></i><span id="overall">Loading…</span></div>
+  </header>
+
+  <section class="status-grid">
+    <div class="status-card"><div class="label">ChatGPT</div><div class="value"><i class="dot" id="chatDot"></i><span id="chatState">Waiting</span></div><div class="sub" id="chatSub">No recent request</div></div>
+    <div class="status-card"><div class="label">Roblox Studio</div><div class="value"><i class="dot" id="studioDot"></i><span id="studioState">Checking</span></div><div class="sub" id="studioSub">0 Roblox tools</div></div>
+    <div class="status-card"><div class="label">Cloud Relay</div><div class="value"><i class="dot" id="cloudDot"></i><span id="cloudState">Checking</span></div><div class="sub" id="cloudSub">WebSocket relay</div></div>
+    <div class="status-card"><div class="label">Desktop Control</div><div class="value"><i class="dot" id="desktopDot"></i><span id="desktopState">Disabled</span></div><div class="sub">4 desktop tools</div></div>
+  </section>
+
+  <main class="grid">
+    <section class="card pair-card">
+      <div class="head"><h2>ChatGPT Connection</h2><span class="muted" id="tokenState">Token checking…</span></div>
+      <div class="label">Pairing code</div>
+      <div class="pair-code" id="pairingCode">--------</div>
+      <div class="label">MCP endpoint</div>
+      <div class="url" id="mcpUrl">Loading…</div>
+      <div class="buttons">
+        <button class="primary" onclick="copyPairing()">Copy Pairing Code</button>
+        <button onclick="copyMcp()">Copy MCP URL</button>
+        <button onclick="regeneratePairing()">Generate New Code</button>
+        <button class="ghost" onclick="openSetup()">Open Setup</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><h2>Bridge Control</h2><span class="pill"><i class="dot" id="bridgeDot"></i><span id="bridgeState">Loading</span></span></div>
+      <div class="rows">
+        <div class="row"><span>Process ID</span><b id="pid">—</b></div>
+        <div class="row"><span>Total Tools</span><b id="toolCount">0</b></div>
+        <div class="row"><span>Last MCP method</span><b id="lastMethod">—</b></div>
+        <div class="row"><span>Config</span><b id="configPath" title="">%APPDATA%\NovaMCP</b></div>
+      </div>
+      <div class="buttons"><button class="primary" onclick="action('start')">Start</button><button onclick="action('restart')">Restart</button><button class="danger" onclick="action('stop')">Stop</button><button class="ghost" onclick="refreshAll()">Refresh</button></div>
+    </section>
+
+    <section class="card">
+      <div class="head"><h2>Security</h2><span class="muted">Local controls</span></div>
+      <div class="row"><div><b>Allow Desktop Control</b><div class="muted" style="font-size:12px;margin-top:4px">Mouse, keyboard, screenshot and visible windows</div></div><div class="switch" id="desktopSwitch" onclick="toggleDesktop()"><span></span></div></div>
+      <div class="security-note">Desktop Control is disabled by default on new installations. Every desktop action is written to the local audit log. Typed text is never stored in the audit log.</div>
+      <div class="buttons"><button class="danger" onclick="revokeToken()">Revoke Cloud Token</button></div>
+    </section>
+
+    <section class="card">
+      <div class="head"><h2>Latest Diagnostics</h2><button class="ghost" onclick="refreshDiagnostics()">Refresh</button></div>
+      <div class="diag-list" id="diagnostics"><div class="diag"><div class="diag-detail">Loading diagnostics…</div></div></div>
+    </section>
+
+    <section class="card" style="grid-column:1/-1">
+      <div class="head"><h2>NovaMCP Updates</h2><span class="pill"><i class="dot" id="updateDot"></i><span id="updateBadge">Checking</span></span></div>
+      <div class="rows">
+        <div class="row"><span>Current version</span><b id="updateCurrent">—</b></div>
+        <div class="row"><span>Latest version</span><b id="updateLatest">—</b></div>
+        <div class="row"><span>Edition</span><b id="updateMode">—</b></div>
+      </div>
+      <div class="update-progress"><span id="updateBar"></span></div>
+      <div class="update-message" id="updateMessage">Checking GitHub Releases…</div>
+      <div class="buttons"><button class="ghost" id="updateCheck" onclick="checkUpdate()">Check for Updates</button><button class="primary" id="updateAction" onclick="runUpdateAction()" disabled>Up to date</button></div>
+    </section>
+
+    <section class="card" style="grid-column:1/-1">
+      <div class="head"><h2>Audit Log</h2><span class="muted">Local only · newest first</span></div>
+      <div class="audit-list" id="audit"><div class="diag"><div class="diag-detail">No events yet.</div></div></div>
+    </section>
+  </main>
+  <div class="footer">NovaMCP · Local Dashboard 127.0.0.1 · Desktop control requires explicit enable</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+let state=null;const $=id=>document.getElementById(id);function dot(id,on,warn=false){$(id).className='dot '+(on?'on':warn?'warn':'off')}function toast(msg){const e=$('toast');e.textContent=msg;e.classList.add('show');clearTimeout(window.__toast);window.__toast=setTimeout(()=>e.classList.remove('show'),1800)}function when(v){if(!v)return'Never';const d=new Date(v),s=Math.round((Date.now()-d)/1000);if(s<5)return'just now';if(s<60)return s+'s ago';if(s<3600)return Math.round(s/60)+'m ago';return d.toLocaleString()}
+async function api(path,opt){const r=await fetch(path,opt);const j=await r.json().catch(()=>({}));if(!r.ok)throw Error(j.error||('HTTP '+r.status));return j}
+async function refreshStatus(){try{state=await api('/api/status');$('version').textContent='v'+state.version+' · '+state.id;const running=state.state==='running';$('overall').textContent=running?'NovaMCP Running':'NovaMCP Stopped';dot('overallDot',running);$('bridgeState').textContent=running?'Running':'Stopped';dot('bridgeDot',running);$('pid').textContent=state.pid||'—';$('toolCount').textContent=state.toolCount||0;$('lastMethod').textContent=state.chatGpt?.lastRpcMethod||'—';$('configPath').textContent=state.configPath||'%APPDATA%\\NovaMCP';$('configPath').title=state.configPath||'';
+const chat=!!state.chatGpt?.connected;$('chatState').textContent=chat?'Connected':'Idle';dot('chatDot',chat,!chat&&running);$('chatSub').textContent=chat?('Last request '+when(state.chatGpt.lastRequestAt)):'No request in the last 5 min';
+const studio=!!state.roblox?.connected;$('studioState').textContent=studio?'Connected':'Offline';dot('studioDot',studio);$('studioSub').textContent=(state.roblox?.tools||0)+' Roblox tools';
+const cloud=!!state.cloudRelay?.connected;$('cloudState').textContent=cloud?'Connected':'Disconnected';dot('cloudDot',cloud);$('cloudSub').textContent=cloud?'Outbound relay active':'Waiting for relay';
+const desktop=!!state.desktopControl?.enabled;$('desktopState').textContent=desktop?'Enabled':'Disabled';dot('desktopDot',desktop,!desktop);$('desktopSwitch').classList.toggle('on',desktop);$('tokenState').textContent=state.cloudRelay?.hasToken?'Cloud token active':'No cloud token';$('pairingCode').textContent=state.cloudRelay?.pairingCode||'--------';$('mcpUrl').textContent=state.mcpUrl||'';renderUpdate(state.update||{});}catch(e){toast('Status error: '+e.message)}}
+async function refreshDiagnostics(){try{const d=await api('/api/diagnostics');const cloud=d.cloud?.events||[];const local=[];if(d.local?.lastError)local.push({event:'local_error',detail:{message:d.local.lastError},ts:new Date().toISOString()});if(d.local?.lastBridgeError)local.push({event:'bridge_error',detail:{message:d.local.lastBridgeError},ts:new Date().toISOString()});const rows=[...local,...cloud].slice(0,20);$('diagnostics').innerHTML=rows.length?rows.map(renderEvent).join(''):'<div class="diag"><div class="diag-detail">No recent diagnostic errors.</div></div>';const aud=d.audit||[];$('audit').innerHTML=aud.length?aud.map(renderEvent).join(''):'<div class="diag"><div class="diag-detail">No audit events yet.</div></div>';}catch(e){$('diagnostics').innerHTML='<div class="diag"><div class="diag-detail">'+esc(e.message)+'</div></div>'}}
+function renderEvent(x){const detail=x.detail&&Object.keys(x.detail).length?JSON.stringify(x.detail):'';return'<div class="diag"><div class="diag-top"><span class="diag-name">'+esc(x.event||'event')+'</span><span class="diag-time">'+esc(when(x.ts))+'</span></div><div class="diag-detail">'+esc(detail||'No details')+'</div></div>'}function esc(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function renderUpdate(u){const mode=u.mode||'standalone',status=u.status||'idle',pct=Math.max(0,Math.min(100,Number(u.progress)||0));$('updateCurrent').textContent='v'+(u.currentVersion||state?.version||'—');$('updateLatest').textContent=u.latestVersion?('v'+u.latestVersion):'—';$('updateMode').textContent=mode==='setup'?'Setup · in-app updates':mode==='portable'?'Portable · manual replace':mode==='development'?'Development':'Standalone';$('updateBar').style.width=pct+'%';const btn=$('updateAction'),check=$('updateCheck');check.disabled=status==='checking'||status==='downloading'||status==='installing';btn.disabled=false;let badge='Ready',message='NovaMCP is ready to check for updates.',action='Check for Updates',on=false,warn=true;if(status==='checking'){badge='Checking';message='Checking GitHub Releases for a newer NovaMCP version…';action='Checking…';btn.disabled=true}else if(status==='up-to-date'){badge='Up to date';message='You already have the latest NovaMCP version.';action='Up to date';btn.disabled=true;on=true;warn=false}else if(status==='available'){badge='Update available';message='NovaMCP '+(u.latestVersion||'new version')+' is available.';action=mode==='setup'?'Download Update':'Download Latest';on=true;warn=false}else if(status==='downloading'){badge='Downloading';message='Downloading update… '+pct.toFixed(0)+'%';action=pct.toFixed(0)+'%';btn.disabled=true;on=true;warn=false}else if(status==='downloaded'){badge='Ready to install';message='Update downloaded. Restart NovaMCP to install it.';action='Restart & Install';on=true;warn=false}else if(status==='installing'){badge='Installing';message='NovaMCP is restarting to install the update…';action='Installing…';btn.disabled=true;on=true;warn=false}else if(status==='error'){badge='Update error';message=u.error||'Update check failed.';action='Try Again';warn=false}dot('updateDot',on,warn);$('updateBadge').textContent=badge;$('updateMessage').textContent=message;btn.textContent=action}
+async function checkUpdate(){try{toast('Checking for updates…');state.update=await api('/api/update/check',{method:'POST'});renderUpdate(state.update)}catch(e){toast(e.message)}}async function runUpdateAction(){const u=state?.update||{};try{if(u.status==='downloaded'){if(!confirm('Restart NovaMCP and install '+(u.latestVersion||'the update')+' now?'))return;await api('/api/update/install',{method:'POST'});return}if(u.status==='available'&&u.mode!=='setup'){if(u.downloadUrl)window.open(u.downloadUrl,'_blank');else window.open('https://github.com/Emper23/NovaMCP/releases/latest','_blank');return}if(u.status==='available'&&u.mode==='setup'){toast('Downloading update…');api('/api/update/download',{method:'POST'}).then(v=>{state.update=v;renderUpdate(v);toast('Update downloaded')}).catch(e=>toast(e.message));return}await checkUpdate()}catch(e){toast(e.message)}}async function action(name){try{await api('/api/'+name,{method:'POST'});toast(name+' requested');setTimeout(refreshAll,500)}catch(e){toast(e.message)}}async function toggleDesktop(){try{const enabled=!state?.desktopControl?.enabled;await api('/api/security/desktop-control',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({enabled})});toast('Desktop Control '+(enabled?'enabled':'disabled'));await refreshStatus()}catch(e){toast(e.message)}}async function regeneratePairing(){try{await api('/api/pairing/regenerate',{method:'POST'});toast('Generating a fresh code…');setTimeout(refreshAll,2200)}catch(e){toast(e.message)}}async function revokeToken(){if(!confirm('Revoke this machine\'s cloud token? Existing ChatGPT authorization will stop working until you pair again.'))return;try{await api('/api/token/revoke',{method:'POST'});toast('Cloud token revoked');setTimeout(refreshAll,2200)}catch(e){toast(e.message)}}async function copyPairing(){const v=state?.cloudRelay?.pairingCode||'';if(!v)return toast('No pairing code yet');await navigator.clipboard.writeText(v);toast('Pairing code copied')}async function copyMcp(){const v=state?.mcpUrl||'';if(!v)return;await navigator.clipboard.writeText(v);toast('MCP URL copied')}function openSetup(){const u=state?.cloudRelay?.setupUrl;if(u)window.open(u,'_blank');else toast('Setup URL unavailable')}async function refreshAll(){await refreshStatus();await refreshDiagnostics()}refreshAll();setInterval(refreshStatus,2500);setInterval(refreshDiagnostics,10000);
+</script>
+</body>
+</html>
