@@ -215,7 +215,7 @@ export function installUpdate() {
   if (updateState.mode !== "setup" || !updater) throw new Error("In-app install is available only in the Setup edition");
   if (!updateState.downloaded) throw new Error("Download the update before installing it");
   setState({ status: "installing", error: null });
-  setImmediate(() => updater.quitAndInstall(false, true));
+  setImmediate(() => updater.quitAndInstall(true, true));
   return publicState();
 }
 
