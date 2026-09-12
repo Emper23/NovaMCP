@@ -7,6 +7,9 @@ import { loadRuntimeState, updateRuntimeState } from "./runtime-state.js";
 import { audit, recentAudit } from "./audit-log.js";
 import { getUpdateState, checkForUpdates, downloadUpdate, installUpdate } from "./update-manager.js";
 import { getAboutInfo } from "./about.js";
+import { getRobloxIntegrationStatus, repairRobloxIntegration, openRobloxStudio } from "./roblox-integration.js";
+import { exportDiagnostics } from "./diagnostics-export.js";
+import { getSigningStatus } from "./signing-status.js";
 
 const root = getRootDir();
 const plugin = JSON.parse(readFileSync(resolve(root, "plugin.json"), "utf8"));
@@ -127,6 +130,28 @@ async function cloudDiagnostics() {
   } catch (error) { return { ok: false, error: error.message, events: [] }; }
 }
 
+async function onboardingStatus() {
+  const config = loadConfig();
+  const integration = await getRobloxIntegrationStatus();
+  const runtime = loadRuntimeState();
+  const explicit = config.onboarding?.completed;
+  const inferredExistingInstall = explicit == null && Boolean(config.cloudRelay?.token) && integration.mcpInstalled && integration.launcherHealthy;
+  const completed = explicit === true || inferredExistingInstall;
+  return {
+    completed,
+    explicit: explicit === true,
+    steps: {
+      roblox: integration.mcpInstalled && integration.launcherHealthy,
+      pairing: Boolean(config.cloudRelay?.token),
+      cloud: runtime.cloudRelayConnected === true,
+      desktopSafety: config.security?.desktopControlEnabled !== true
+    },
+    pairingCode: config.cloudRelay?.pairingCode || "",
+    setupUrl: config.cloudRelay?.setupUrl || "",
+    roblox: integration
+  };
+}
+
 async function readBody(req) {
   let text = "";
   for await (const chunk of req) text += chunk;
@@ -180,6 +205,15 @@ const server = http.createServer(async (req, res) => {
     if (req.method === "GET" && url.pathname === "/api/diagnostics") return json(res, { local: (await status()).diagnostics, cloud: await cloudDiagnostics(), audit: recentAudit(20) });
     if (req.method === "GET" && url.pathname === "/api/update") return json(res, getUpdateState());
     if (req.method === "GET" && url.pathname === "/api/about") return json(res, getAboutInfo(plugin.version, getUpdateState()));
+    if (req.method === "GET" && url.pathname === "/api/onboarding") return json(res, await onboardingStatus());
+    if (req.method === "POST" && url.pathname === "/api/onboarding/complete") { const before = await onboardingStatus(); if (!before.steps.roblox || !before.steps.pairing) return json(res, { ok: false, error: "Complete Roblox integration and ChatGPT pairing first" }, 409); updateConfig(config => { config.onboarding ??= {}; config.onboarding.completed = true; config.onboarding.completedAt = new Date().toISOString(); return config; }); audit("onboarding_completed"); return json(res, await onboardingStatus()); }
+    if (req.method === "POST" && url.pathname === "/api/onboarding/reset") { updateConfig(config => { config.onboarding ??= {}; config.onboarding.completed = false; config.onboarding.completedAt = null; return config; }); audit("onboarding_reset"); return json(res, await onboardingStatus()); }
+    if (req.method === "GET" && url.pathname === "/api/roblox") return json(res, await getRobloxIntegrationStatus());
+    if (req.method === "POST" && url.pathname === "/api/roblox/repair") return json(res, await repairRobloxIntegration());
+    if (req.method === "POST" && url.pathname === "/api/roblox/open") return json(res, await openRobloxStudio(), 202);
+    if (req.method === "POST" && url.pathname === "/api/roblox/test") return json(res, { integration: await getRobloxIntegrationStatus(true), health: await localHealth() });
+    if (req.method === "GET" && url.pathname === "/api/signing") return json(res, await getSigningStatus());
+    if (req.method === "POST" && url.pathname === "/api/diagnostics/export") { const currentStatus = await status(); const result = await exportDiagnostics({ version: plugin.version, status: currentStatus, roblox: await getRobloxIntegrationStatus(), update: getUpdateState(), signing: await getSigningStatus() }); return json(res, result, 201); }
     if (req.method === "POST" && url.pathname === "/api/update/check") return json(res, await checkForUpdates());
     if (req.method === "POST" && url.pathname === "/api/update/download") return json(res, await downloadUpdate(), 202);
     if (req.method === "POST" && url.pathname === "/api/update/install") return json(res, installUpdate(), 202);
