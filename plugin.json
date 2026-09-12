@@ -1,7 +1,7 @@
 {
   "id": "novamcp",
   "name": "NovaMCP",
-  "version": "7.0.1",
+  "version": "7.0.2",
   "type": "mcp-connector",
   "entry": "src/bridge-server.js",
   "transport": "streamable-http"
