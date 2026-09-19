@@ -1,6 +1,6 @@
 {
   "name": "novamcp",
-  "version": "7.2.2",
+  "version": "7.2.3",
   "private": true,
   "type": "module",
   "scripts": {
@@ -12,7 +12,7 @@
     "relay": "node src/cloud-relay-agent.js",
     "discover": "node src/tool-discovery.js",
     "package": "node src/installer.js",
-    "check": "node --check src/config-store.js && node --check src/runtime-state.js && node --check src/audit-log.js && node --check src/desktop-control.js && node --check src/cloud-relay-agent.js && node --check src/bridge-server.js && node --check src/roblox-integration.js && node --check src/diagnostics-export.js && node --check src/signing-status.js && node --check src/about.js && node --check src/dashboard.js && node --check src/update-manager.js && node --check src/electron-main.js && node --check cloudflare/chatgpt-worker.js",
+    "check": "node --check src/config-store.js && node --check src/runtime-state.js && node --check src/audit-log.js && node --check src/desktop-control.js && node --check src/cloud-relay-agent.js && node --check src/building-detail-tool.js && node --check src/bridge-server.js && node --check src/roblox-integration.js && node --check src/diagnostics-export.js && node --check src/signing-status.js && node --check src/about.js && node --check src/dashboard.js && node --check src/update-manager.js && node --check src/electron-main.js && node --check cloudflare/chatgpt-worker.js",
     "deploy": "wrangler deploy",
     "dev": "electron .",
     "build:dir": "node scripts/build.cjs dir",
